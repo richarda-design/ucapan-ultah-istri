@@ -48,7 +48,6 @@
       pointer-events: none;
       z-index: 1;
     }
-    /* tombol musik */
     #playBtn {
       padding: 10px 20px;
       font-size: 16px;
@@ -58,18 +57,10 @@
       border-radius: 10px;
       cursor: pointer;
       margin-top: 20px;
-      z-index: 3;
-      position: relative;
     }
   </style>
 </head>
 <body>
-
-  <!-- Tombol Play Music -->
-  <button id="playBtn">🎵 Play Music</button>
-
-  <!-- Audio file -->
-  <audio id="bgMusic" src="kahitna-ulangtahun.mp3"></audio>
 
   <div class="card">
     <h1>Selamat Ulang Tahun, Sayangku ❤️</h1>
@@ -81,29 +72,35 @@
       Terima kasih telah menjadi pendamping dalam hidupku.<br>
       We Love You, Andre & Calla. <span class="heart">♥</span>
     </p>
+    
+    <!-- Tombol Play Music -->
+    <button id="playBtn">🎵 Play Music</button>
   </div>
+
+  <!-- Audio File -->
+  <audio id="bgMusic" src="kahitna-ulang-tahun.mp3"></audio>
 
   <!-- Canvas untuk confetti -->
   <canvas id="confetti"></canvas>
 
   <script>
-    // ===== Musik =====
-    const playBtn = document.getElementById('playBtn');
-    const bgMusic = document.getElementById('bgMusic');
+    // Script musik
+    const playBtn = document.getElementById("playBtn");
+    const bgMusic = document.getElementById("bgMusic");
     let isPlaying = false;
 
-    playBtn.addEventListener('click', () => {
-      if (isPlaying) {
+    playBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        bgMusic.play();
+        playBtn.textContent = "⏸ Pause Music";
+      } else {
         bgMusic.pause();
         playBtn.textContent = "🎵 Play Music";
-      } else {
-        bgMusic.play();
-        playBtn.textContent = "⏸️ Pause Music";
       }
       isPlaying = !isPlaying;
     });
 
-    // ===== Confetti =====
+    // Script confetti
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
