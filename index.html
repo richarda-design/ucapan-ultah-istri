@@ -48,16 +48,6 @@
       pointer-events: none;
       z-index: 1;
     }
-    #playBtn {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #ff69b4;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -72,32 +62,22 @@
       Terima kasih telah menjadi pendamping dalam hidupku.<br>
       We Love You, Andre & Calla. <span class="heart">♥</span>
     </p>
-    
-    <!-- Tombol Play Music -->
-    <button id="playBtn">🎵 Play Music</button>
   </div>
 
-  <!-- Audio File -->
-  <audio id="bgMusic" src="kahitna-ulang-tahun.mp3"></audio>
+  <!-- Audio File autoplay -->
+  <audio id="bgMusic" src="kahitna-ulang-tahun.mp3" autoplay loop muted></audio>
 
   <!-- Canvas untuk confetti -->
   <canvas id="confetti"></canvas>
 
   <script>
-    // Script musik
-    const playBtn = document.getElementById("playBtn");
-    const bgMusic = document.getElementById("bgMusic");
-    let isPlaying = false;
-
-    playBtn.addEventListener("click", () => {
-      if (!isPlaying) {
-        bgMusic.play();
-        playBtn.textContent = "⏸ Pause Music";
-      } else {
-        bgMusic.pause();
-        playBtn.textContent = "🎵 Play Music";
-      }
-      isPlaying = !isPlaying;
+    // Unmute musik setelah autoplay
+    window.addEventListener("load", () => {
+      const bgMusic = document.getElementById("bgMusic");
+      bgMusic.muted = false; // aktifkan suara
+      bgMusic.play().catch(err => {
+        console.log("Autoplay dicegah browser:", err);
+      });
     });
 
     // Script confetti
