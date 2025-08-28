@@ -25,7 +25,14 @@
     }
     h1 {
       font-size: 2.5rem;
-      color: #d6336c;
+      background: linear-gradient(90deg, #ff99cc, #ff3366, #ff99cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 3s infinite linear;
+    }
+    @keyframes shine {
+      0% { background-position: 0%; }
+      100% { background-position: 200%; }
     }
     p {
       font-size: 1.2rem;
@@ -48,16 +55,36 @@
       pointer-events: none;
       z-index: 1;
     }
+
+    /* Balon naik */
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      font-size: 3rem;
+      animation: float 10s infinite ease-in;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Hati jatuh */
+    .heart-fall {
+      position: absolute;
+      top: -50px;
+      font-size: 2rem;
+      color: red;
+      animation: fall 6s infinite linear;
+    }
+    @keyframes fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <!-- Musik romantis -->
-  <audio autoplay loop>
-    <source src="lagu-romantis.mp3" type="audio/mpeg">
-  </audio>
-
   <div class="card">
-    <h1>Selamat Ulang Tahun ke-31, Sayangku ❤️</h1>
+    <h1>Selamat Ulang Tahun, Sayangku ❤️</h1>
     <p>
       Semoga Tuhan Yesus selalu memberkatimu,<br>
       memberikan panjang umur, kesehatan,<br>
@@ -71,7 +98,21 @@
   <!-- Canvas untuk confetti -->
   <canvas id="confetti"></canvas>
 
+  <!-- Balon -->
+  <div class="balloon" style="left:10%;">🎈</div>
+  <div class="balloon" style="left:30%;">🎈</div>
+  <div class="balloon" style="left:50%;">🎈</div>
+  <div class="balloon" style="left:70%;">🎈</div>
+  <div class="balloon" style="left:90%;">🎈</div>
+
+  <!-- Hati jatuh -->
+  <div class="heart-fall" style="left:15%; animation-delay:0s;">❤️</div>
+  <div class="heart-fall" style="left:40%; animation-delay:2s;">❤️</div>
+  <div class="heart-fall" style="left:65%; animation-delay:4s;">❤️</div>
+  <div class="heart-fall" style="left:85%; animation-delay:6s;">❤️</div>
+
   <script>
+    // Confetti
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
